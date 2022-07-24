@@ -22,7 +22,7 @@ export default createStore({
       state.userInfo=userInfo;
       sessionStorage.setItem("userInfo",JSON.stringify(userInfo))
     },
-    REMOVE: (state) => {
+    REMOVE_INFO: (state) => {
       state.token= '';
       state.userInfo= {};
       localStorage.setItem("token",'');

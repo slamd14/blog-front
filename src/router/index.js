@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Blogs from '../views/Blogs.vue'
 import BlogEdit from '../views/BlogEdit.vue'
@@ -23,23 +23,29 @@ const routes = [
   {
     path: '/blog/add',
     name: 'BlogAdd',
-    component: BlogEdit
+    component: BlogEdit,
+    meta: {
+      requireAuth : true
+    }
   },
   {
-    path: '/blog/:blogId',
+    path: '/blog/:blogId', //路径  ":blogId"表示blogId为参数
     name: 'BlogDetail',
-    component: BlogDetail
+    component: BlogDetail    //相应页面(组件)
   },
   {
     path: '/blog/:blogId/edit',
     name: 'BlogEdit',
-    component: BlogEdit
+    component: BlogEdit,
+    meta: {
+      requireAuth: true
+    }
   }
 
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 

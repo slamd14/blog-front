@@ -73,18 +73,20 @@ body > .el-container {
 
 
 <script>
+import {ElMessage} from "element-plus";
+
 export default {
   name: "Login",
   data() {
     return {
       ruleForm: {
-        username: 'markerhub',
+        username: 'slamd14',
         password: '111111'
       },
       rules: {
         username: [
           { required: true, message: '请输入帐号', trigger: 'blur' },
-          { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
+          { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'change' }
@@ -96,20 +98,26 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$axios.post('http://localhost:8081/login',this.ruleForm).then(res => {
+          this.$axios.post('/login',this.ruleForm).then(res => {
             // console.log("res.data: "+res.data);
             // console.log("res.header: "+res.headers)
+            // if(res.data.code===1){//配置全局处理更好
+            //   alert("登录成功!");
+            // }else{
+            //   alert("登陆失败");
+            // }
             if(res.data.code==1){
-              alert("登录成功!");
+              ElMessage.success("登录成功");
             }else{
-              alert("登陆失败");
+              ElMessage.error('登陆失败');
+              return Promise.reject(res.data.msg);//就不会直接终止了这次响应，不会再把响应继续传递
             }
             const jwt=res.headers['authorization'];
             const userInfo=res.data.data;
             //把数据共享给其他请求(数据存在客户端浏览器本地)
             this.$store.commit("SET_TOKEN",jwt);
             this.$store.commit("SET_USERINFO",userInfo);
-            this.$router.push("/blogs");
+            this.$router.push("/blogs");//重定向
           })
 
         } else {
@@ -119,7 +127,7 @@ export default {
       });
     },
     resetForm(formName) {
-      this.$refs[formName].resetFields();
+      this.ruleForm.username=this.ruleForm.password='';
     }
   }
 }
