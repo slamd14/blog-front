@@ -9,7 +9,7 @@ import {ElMessage} from 'element-plus'
 import router from './router'
 import store from './store'
 //前置拦截
-axios.defaults.baseURL="http://localhost:8081" //这样的话发起axios请求的时候，http://localhost:8081就会作为前缀添加到请求路径里
+axios.defaults.baseURL="http://8.130.27.140:8081" //这样的话发起axios请求的时候，http://8.130.27.140:8081就会作为前缀添加到请求路径里
 
 axios.interceptors.request.use(config => {
     return config
