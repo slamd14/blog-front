@@ -3,6 +3,8 @@ import Login from '../views/Login.vue'
 import Blogs from '../views/Blogs.vue'
 import BlogEdit from '../views/BlogEdit.vue'
 import BlogDetail from '../views/BlogDetail.vue'
+import Register from '../views/Register'
+import EditPersonal from "../views/EditPersonal";
 
 const routes = [
   {
@@ -16,9 +18,19 @@ const routes = [
     component: Blogs
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/editPersonal',
+    name: 'EditPersonal',
+    component: EditPersonal
   },
   {
     path: '/blog/add',

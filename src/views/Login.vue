@@ -18,6 +18,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button type="danger" @click="register">注册</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -95,6 +96,10 @@ export default {
     };
   },
   methods: {
+    register(){
+      this.$router.push("/register");//重定向
+    },
+
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

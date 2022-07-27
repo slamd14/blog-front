@@ -3,7 +3,9 @@
     <h3>欢迎来到slamd14的博客</h3>
     <div class="block">
       <el-avatar :size="50" :src="user.avatar" />
-      <div>{{user.username}}</div>
+      <div v-show="!hasLogin">未登录</div>
+      <div v-show="hasLogin">{{user.username}}</div>
+      <el-button type="info" v-show="hasLogin" @click="editPersonal">编辑个人信息</el-button>
     </div>
 
     <div class="maction">
@@ -53,6 +55,9 @@ export default {
         this.$store.commit("REMOVE_INFO");
         this.$router.push("/login");
       })
+    },
+    editPersonal(){
+      this.$router.push("/editPersonal");
     }
   },
   created() {
@@ -60,6 +65,8 @@ export default {
       this.user.username=this.$store.getters.GET_USERINFO.username;
       this.user.avatar=this.$store.getters.GET_USERINFO.avatar;
       this.hasLogin=true;
+    }else{
+
     }
   }
 }

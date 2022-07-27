@@ -27,7 +27,11 @@ export default createStore({
       state.userInfo= {};
       localStorage.setItem("token",'');
       sessionStorage.setItem("userInfo",JSON.stringify(''));
-    }
+    },
+    REMOVE_OnlyINFO: (state) => {
+      state.userInfo= {};
+      sessionStorage.setItem("userInfo",JSON.stringify(''));
+    },
   }
   ,
   actions: {
